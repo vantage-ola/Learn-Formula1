@@ -1,16 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import { Provider, Button } from 'react-native-paper'
+import { Provider, Button, Title, Paragraph } from 'react-native-paper';
+import HomeScreen from './screens/home';
 
 export default function App() {
   return (
-    <Provider>
-        <View style={styles.container}>
-            <Text>Learn Formula 1</Text>
-        <StatusBar style="auto" />
-    </View>
-    </Provider>
-
+        <HomeScreen/>
   );
 }
 
