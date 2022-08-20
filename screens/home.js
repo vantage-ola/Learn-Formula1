@@ -1,23 +1,27 @@
 import React, {useEffect, useState} from "react";
 import { StyleSheet, Text, View, FlatList } from 'react-native';
 
-import { Button, Title, Paragraph } from "react-native-paper";
+import { Button, Title, Paragraph, Card, ActivityIndicator} from "react-native-paper";
 import {Tabs, TabScreen, useTabIndex, useTabNavigation } from 'react-native-paper-tabs';
 
 function HomeScreen() {
     const [isLoading, setLoading] = useState(true);
     const [data, setData] = useState([]);
-    
+    const [limit, setLimit] = useState(15);
  
     console.log(data);
-
-    useEffect(() => {
-        fetch('http://ergast.com/api/f1/drivers.json')
+    useEffect(() => getData(), []);
+    const getData =() => {
+        fetch('http://ergast.com/api/f1/drivers.json?limit='+limit)
           .then((response) => response.json())
-          .then((json) => setData(json.MRData.DriverTable))
+          .then((json) => {
+            setLimit(limit + 30);
+            setData(json.MRData.DriverTable)
+
+          })
           .catch((error) => console.error(error))
           .finally(() => setLoading(false));
-      }, []);
+      };
 
     return (
       <Tabs
@@ -44,18 +48,24 @@ function HomeScreen() {
 
         <TabScreen label="Drivers">
            <View style={{flex:1 }}>
-           {isLoading ? <Text>Loading...</Text> : 
+           {isLoading ? <ActivityIndicator animating={true} color={'#ff0100'} /> : 
       ( <View style={{ flex: 1, flexDirection: 'column', justifyContent:  'space-between'}}>
 
           <FlatList
             data={data.Drivers}
             keyExtractor={({ driverId }, index) => driverId}
             renderItem={({ item }) => (
-              <Text>{item.givenName + ' ' + item.familyName}</Text>
+                <Card mode="outlined">
+                    <Card.Content>
+                        <Title>{item.givenName} <Text>{item.permanentNumber} </Text> </Title>
+                        <Paragraph>{item.familyName} | {item.nationality} | {item.dateOfBirth}</Paragraph>
+                    </Card.Content>
+                </Card>
             )}
           />
         </View>
       )}
+      <Button onPress={getData}>Load More</Button>
            </View>
         </TabScreen>
       </Tabs>
