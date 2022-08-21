@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import axios from "axios";
 import { StyleSheet, Text, View, FlatList } from 'react-native';
 
 import { Button, Title, Paragraph, Card, ActivityIndicator} from "react-native-paper";
@@ -6,23 +7,42 @@ import {Tabs, TabScreen, useTabIndex, useTabNavigation } from 'react-native-pape
 
 function HomeScreen() {
     const [isLoading, setLoading] = useState(true);
-    const [data, setData] = useState([]);
+    const [drivers, setDrivers] = useState([]);
+    const [teams, setTeams] = useState([]);
+    const [circuits, setCircuits] = useState([]);
     const [limit, setLimit] = useState(15);
  
-    console.log(data);
-    useEffect(() => getData(), []);
-    const getData =() => {
-        fetch('http://ergast.com/api/f1/drivers.json?limit='+limit)
-          .then((response) => response.json())
-          .then((json) => {
-            setLimit(limit + 30);
-            setData(json.MRData.DriverTable)
+    useEffect(() => fetchData(), []);
+    console.log(circuits)
+    const fetchData = () => {
+        const BASE_API_URL = 'http://ergast.com/api/f1/'
 
-          })
-          .catch((error) => console.error(error))
-          .finally(() => setLoading(false));
-      };
+        const driverUrl = `${BASE_API_URL}drivers.json?limit=`+limit
+        const teamUrl = `${BASE_API_URL}constructors.json?limit=`+limit
+        const circuitUrl = `${BASE_API_URL}circuits.json?limit=`+limit
 
+        const getDriver = axios.get(driverUrl)
+        const getTeam = axios.get(teamUrl)
+        const getCircuit = axios.get(circuitUrl)
+
+        axios.all([getDriver, getTeam, getCircuit]).then(
+            axios.spread((... allData) => {
+                const driverData = allData[0].data
+                const teamData = allData[1].data
+                const circuitData = allData[2].data
+
+                setLimit(limit + 30)
+
+                setDrivers(driverData.MRData.DriverTable)
+                setTeams(teamData.MRData.ConstructorTable)
+                setCircuits(circuitData.MRData.CircuitTable)
+            })
+        )
+        .catch((error) => console.error(error))
+        .finally(() => setLoading(false))
+
+    }
+    
     return (
       <Tabs
         // defaultIndex={0} // default = 0
@@ -40,10 +60,49 @@ function HomeScreen() {
       >
         
         <TabScreen label="Teams">
-        <View style={{  flex:1 }} />
+            <View style={{  flex:1 }}>
+            {isLoading ? <ActivityIndicator animating={true} color={'#ff0100'} /> : 
+      ( <View style={{ flex: 1, flexDirection: 'column', justifyContent:  'space-between'}}>
+
+          <FlatList
+            data={teams.Constructors}
+            keyExtractor={({ constructorId }, index) => constructorId}
+            renderItem={({ item }) => (
+                <Card mode="outlined">
+                    <Card.Content>
+                        <Title>{item.name}</Title>
+                        <Paragraph>{item.nationality}</Paragraph>
+                    </Card.Content>
+                </Card>
+            )}
+          />
+        </View>
+      )}
+        <Button onPress={fetchData}>Load More</Button>
+            </View>
         </TabScreen>
+
         <TabScreen label="Circuits" >
-          <View style={{ flex:1 }} />
+          <View style={{ flex:1 }} >
+          {isLoading ? <ActivityIndicator animating={true} color={'#ff0100'} /> : 
+      ( <View style={{ flex: 1, flexDirection: 'column', justifyContent:  'space-between'}}>
+
+          <FlatList
+            data={circuits.Circuits}
+            keyExtractor={({ circuitId }, index) => circuitId}
+            renderItem={({ item }) => (
+                <Card mode="outlined">
+                    <Card.Content>
+                        <Title>{item.circuitName}</Title>
+                        <Paragraph>{item.Location.country}</Paragraph>
+                    </Card.Content>
+                </Card>
+            )}
+          />
+        </View>
+      )}
+        <Button onPress={fetchData}>Load More</Button>
+          </View>
         </TabScreen>
 
         <TabScreen label="Drivers">
@@ -52,7 +111,7 @@ function HomeScreen() {
       ( <View style={{ flex: 1, flexDirection: 'column', justifyContent:  'space-between'}}>
 
           <FlatList
-            data={data.Drivers}
+            data={drivers.Drivers}
             keyExtractor={({ driverId }, index) => driverId}
             renderItem={({ item }) => (
                 <Card mode="outlined">
@@ -65,7 +124,7 @@ function HomeScreen() {
           />
         </View>
       )}
-      <Button onPress={getData}>Load More</Button>
+      <Button onPress={fetchData}>Load More</Button>
            </View>
         </TabScreen>
       </Tabs>
