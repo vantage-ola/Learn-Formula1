@@ -4,6 +4,7 @@ import { StyleSheet, Text, View, FlatList } from 'react-native';
 
 import { Button, Title, Paragraph, Card, ActivityIndicator} from "react-native-paper";
 import {Tabs, TabScreen, useTabIndex, useTabNavigation } from 'react-native-paper-tabs';
+import { Appbar } from 'react-native-paper';
 
 function HomeScreen() {
     const [isLoading, setLoading] = useState(true);
@@ -44,6 +45,10 @@ function HomeScreen() {
     }
     
     return (
+    <View>
+        <Appbar.Header>
+            <Appbar.Content title="Learn Formula 1" />
+        </Appbar.Header>
       <Tabs
         // defaultIndex={0} // default = 0
         // uppercase={false} // true/false | default=true | labels are uppercase
@@ -127,7 +132,7 @@ function HomeScreen() {
       <Button onPress={fetchData}>Load More</Button>
            </View>
         </TabScreen>
-      </Tabs>
+      </Tabs></View>
     )
 }
 
