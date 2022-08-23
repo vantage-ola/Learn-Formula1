@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import { StyleSheet, Text, View, FlatList } from 'react-native';
+import { Text, View, FlatList } from 'react-native';
 
 import { Button, Title, Paragraph, Card, ActivityIndicator} from "react-native-paper";
-import {Tabs, TabScreen, useTabIndex, useTabNavigation } from 'react-native-paper-tabs';
+import {Tabs, TabScreen} from 'react-native-paper-tabs';
 import { Appbar } from 'react-native-paper';
 
 function HomeScreen() {
@@ -14,7 +14,7 @@ function HomeScreen() {
     const [limit, setLimit] = useState(15);
  
     useEffect(() => fetchData(), []);
-    console.log(circuits)
+    //console.log(circuits)
     const fetchData = () => {
         const BASE_API_URL = 'http://ergast.com/api/f1/'
 
@@ -45,8 +45,9 @@ function HomeScreen() {
     }
     
     return (
-    <View>
+    <View style={{flex: 1}}>
         <Appbar.Header>
+            <Appbar.Action icon="menu" />
             <Appbar.Content title="Learn Formula 1" />
         </Appbar.Header>
       <Tabs
@@ -132,7 +133,8 @@ function HomeScreen() {
       <Button onPress={fetchData}>Load More</Button>
            </View>
         </TabScreen>
-      </Tabs></View>
+      </Tabs>
+      </View>
     )
 }
 
