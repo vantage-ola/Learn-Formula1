@@ -48,7 +48,7 @@ function HomeScreen() {
     <View style={{flex: 1}}>
         <Appbar.Header>
             <Appbar.Action icon="menu" />
-            <Appbar.Content titleStyle={{fontWeight: 700 }} title="Learn Formula 1" />
+            <Appbar.Content titleStyle={{fontWeight: 700 }} title="Learn F1" />
         </Appbar.Header>
       <Tabs
         // defaultIndex={0} // default = 0
