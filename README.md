@@ -1,3 +1,3 @@
-# formula1 Edu
+# Learn F1
 
-This application gives you information about the most popular motorsport event of all time!
+Learn Formula 1 by browsing through current and historical data about the biggest Motorsport event of all time.
