@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import { Text, View, FlatList } from 'react-native';
 
-import { Button, Title, Paragraph, Card, ActivityIndicator} from "react-native-paper";
+import { Button, Title, Paragraph, Card, ActivityIndicator } from "react-native-paper";
 import {Tabs, TabScreen} from 'react-native-paper-tabs';
 import { Appbar } from 'react-native-paper';
 
@@ -48,7 +48,7 @@ function HomeScreen() {
     <View style={{flex: 1}}>
         <Appbar.Header>
             <Appbar.Action icon="menu" />
-            <Appbar.Content title="Learn Formula 1" />
+            <Appbar.Content titleStyle={{fontWeight: 700 }} title="Learn Formula 1" />
         </Appbar.Header>
       <Tabs
         // defaultIndex={0} // default = 0
