@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import { Text, View, FlatList } from 'react-native';
+import { Text, View, FlatList, StyleSheet} from 'react-native';
 
 import { Button, Title, Paragraph, Card, ActivityIndicator } from "react-native-paper";
 import {Tabs, TabScreen} from 'react-native-paper-tabs';
-import { Appbar } from 'react-native-paper';
+import { Appbar, FAB } from 'react-native-paper';
 
 function HomeScreen() {
     const [isLoading, setLoading] = useState(true);
@@ -47,8 +47,9 @@ function HomeScreen() {
     return (
     <View style={{flex: 1}}>
         <Appbar.Header>
-            <Appbar.Action icon="menu" />
-            <Appbar.Content titleStyle={{fontWeight: 700 }} title="Learn F1" />
+            
+            <Appbar.Content titleStyle={{fontWeight: "bold", fontSize: 25 }} title="{} Season" />
+            <Appbar.Action label='Select year' icon="dots-vertical"onPress={() => {}} />
         </Appbar.Header>
       <Tabs
         // defaultIndex={0} // default = 0
@@ -84,7 +85,7 @@ function HomeScreen() {
           />
         </View>
       )}
-        <Button onPress={fetchData}>Load More</Button>
+        <Button onPress={fetchData}>Load More</Button>  
             </View>
         </TabScreen>
 
