@@ -55,7 +55,7 @@ function HomeScreen() {
         {/* Header, contains title, edit and side bar button */}
         <Appbar.Header>
             <Appbar.Action icon={MORE_ICON} onPress={() => {}} />            
-            <Appbar.Content titleStyle={{fontWeight: "bold", fontSize: 25 }} title="{} Season" />
+            <Appbar.Content titleStyle={{fontWeight: "bold", fontSize: 25 }} title={`${year} Season`} />
             <Button color="white" >Edit</Button>
         </Appbar.Header>
 
@@ -81,7 +81,6 @@ function HomeScreen() {
           />
         </View>
       )}
-        <Button onPress={fetchData}>Load More</Button>  
             </View>
         </TabScreen>
 
@@ -104,7 +103,6 @@ function HomeScreen() {
           />
         </View>
       )}
-        <Button onPress={fetchData}>Load More</Button>
           </View>
         </TabScreen>
 
@@ -127,7 +125,6 @@ function HomeScreen() {
           />
         </View>
       )}
-        <Button onPress={fetchData}>Load More</Button>
            </View>
         </TabScreen>
       </Tabs>
