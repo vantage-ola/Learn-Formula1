@@ -1,38 +1,41 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import { Text, View, FlatList, StyleSheet} from 'react-native';
+import { Text, View, FlatList, StyleSheet, Platform} from 'react-native';
 
 import { Button, Title, Paragraph, Card, ActivityIndicator } from "react-native-paper";
 import {Tabs, TabScreen} from 'react-native-paper-tabs';
-import { Appbar, FAB } from 'react-native-paper';
+import { Appbar} from 'react-native-paper';
+
+
 
 function HomeScreen() {
+    
     const [isLoading, setLoading] = useState(true);
     const [drivers, setDrivers] = useState([]);
     const [teams, setTeams] = useState([]);
     const [circuits, setCircuits] = useState([]);
-    const [limit, setLimit] = useState(15);
- 
+    const [year, setYear ] = useState(2022) // year season
+
     useEffect(() => fetchData(), []);
     //console.log(circuits)
+    // Function to return data from the api
     const fetchData = () => {
         const BASE_API_URL = 'http://ergast.com/api/f1/'
 
-        const driverUrl = `${BASE_API_URL}drivers.json?limit=`+limit
-        const teamUrl = `${BASE_API_URL}constructors.json?limit=`+limit
-        const circuitUrl = `${BASE_API_URL}circuits.json?limit=`+limit
+        const driverUrl = `${BASE_API_URL}${year}/drivers.json?`
+        const teamUrl = `${BASE_API_URL}${year}/constructors.json`
+        const circuitUrl = `${BASE_API_URL}${year}/circuits.json`
 
         const getDriver = axios.get(driverUrl)
         const getTeam = axios.get(teamUrl)
         const getCircuit = axios.get(circuitUrl)
 
-        axios.all([getDriver, getTeam, getCircuit]).then(
-            axios.spread((... allData) => {
+        axios.all([getDriver, getTeam, getCircuit]).then(  // using axios to  handle returning data thrice
+            axios.spread((... allData) => {                // so it loads all of them to 'state' all at once
+
                 const driverData = allData[0].data
                 const teamData = allData[1].data
                 const circuitData = allData[2].data
-
-                setLimit(limit + 30)
 
                 setDrivers(driverData.MRData.DriverTable)
                 setTeams(teamData.MRData.ConstructorTable)
@@ -44,27 +47,20 @@ function HomeScreen() {
 
     }
     
+    const MORE_ICON = Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical'; // change icon based on platform
+
     return (
     <View style={{flex: 1}}>
+
+        {/* Header, contains title, edit and side bar button */}
         <Appbar.Header>
-            
+            <Appbar.Action icon={MORE_ICON} onPress={() => {}} />            
             <Appbar.Content titleStyle={{fontWeight: "bold", fontSize: 25 }} title="{} Season" />
-            <Appbar.Action label='Select year' icon="dots-vertical"onPress={() => {}} />
+            <Button color="white" >Edit</Button>
         </Appbar.Header>
-      <Tabs
-        // defaultIndex={0} // default = 0
-        // uppercase={false} // true/false | default=true | labels are uppercase
-        // showTextLabel={false} // true/false | default=false (KEEP PROVIDING LABEL WE USE IT AS KEY INTERNALLY + SCREEN READERS)
-        // iconPosition // leading, top | default=leading
-        // style={{ backgroundColor:'#fff' }} // works the same as AppBar in react-native-paper
-        // dark={false} // works the same as AppBar in react-native-paper
-        // theme={} // works the same as AppBar in react-native-paper
-        // mode="scrollable" // fixed, scrollable | default=fixed
-        // onChangeIndex={(newIndex) => {}} // react on index change
-        // showLeadingSpace={true} //  (default=true) show leading space in scrollable tabs inside the header
-        // disableSwipe={false} // (default=false) disable swipe to left/right gestures
-        
-      >
+
+      {/* Tabs, contains swipeable rendered data*/}  
+      <Tabs>
         
         <TabScreen label="Teams">
             <View style={{  flex:1 }}>
@@ -131,11 +127,11 @@ function HomeScreen() {
           />
         </View>
       )}
-      <Button onPress={fetchData}>Load More</Button>
+        <Button onPress={fetchData}>Load More</Button>
            </View>
         </TabScreen>
       </Tabs>
-      </View>
+    </View>
     )
 }
 
