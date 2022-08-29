@@ -6,7 +6,7 @@ import { Button, Title, Paragraph, Card, ActivityIndicator } from "react-native-
 import {Tabs, TabScreen} from 'react-native-paper-tabs';
 import { Appbar} from 'react-native-paper';
 
-
+import Flag from "./flag";
 
 function HomeScreen() {
     
@@ -95,8 +95,11 @@ function HomeScreen() {
             renderItem={({ item }) => (
                 <Card mode="outlined">
                     <Card.Content>
-                        <Title>{item.circuitName}</Title>
-                        <Paragraph>{item.Location.country}</Paragraph>
+                    <Card.Title 
+                    title={item.circuitName}
+                    left={(props) => <Flag {...props} country={item.Location.country}/>}
+                    />
+                    
                     </Card.Content>
                 </Card>
             )}
