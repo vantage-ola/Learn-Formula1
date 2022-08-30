@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import { Text, View, FlatList, StyleSheet, Platform} from 'react-native';
 
-import { Button, Title, Paragraph, Card, ActivityIndicator } from "react-native-paper";
+import { Button, Title, Paragraph, Card, ActivityIndicator, IconButton } from "react-native-paper";
 import {Tabs, TabScreen} from 'react-native-paper-tabs';
 import { Appbar, List } from 'react-native-paper';
 
@@ -73,8 +73,13 @@ function HomeScreen() {
             renderItem={({ item }) => (
                 <Card mode="outlined">
                     <Card.Content>
-                        <Title style={{fontWeight: "bold"}}>{item.name}</Title>
-                        <Paragraph>{item.nationality} Team</Paragraph>
+                        <Card.Title
+                        title={item.name}
+                        subtitle={`${item.nationality} Team`}
+                        subtitleStyle={{fontSize: 15}}
+                        right={(props) => <IconButton {...props} icon="chevron-right" onPress={() => {}} />}
+                        />
+                        
                     </Card.Content>
                 </Card>
             )}
@@ -99,6 +104,8 @@ function HomeScreen() {
                     title={item.circuitName}
                     titleStyle={{fontWeight: "bold"}}
                     left={(props) => <Flag {...props} country={item.Location.country}/>}
+                    right={(props) => <IconButton {...props} icon="chevron-right" onPress={() => {}} />}
+
                     />
                     
                     </Card.Content>
@@ -125,6 +132,7 @@ function HomeScreen() {
                           title={`${item.givenName} ${item.familyName}`}
                           titleStyle={{fontWeight: "bold"}}
                           left={(props) => <Text {...props} style={{fontWeight: "bold", fontSize: 25, color:"#ff0100"}}>{item.permanentNumber} </Text>   }
+                          right={(props) => <IconButton {...props} icon="chevron-right" onPress={() => {}} />}
                         />
                             
                     </Card.Content>
