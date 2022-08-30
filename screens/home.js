@@ -4,7 +4,7 @@ import { Text, View, FlatList, StyleSheet, Platform} from 'react-native';
 
 import { Button, Title, Paragraph, Card, ActivityIndicator } from "react-native-paper";
 import {Tabs, TabScreen} from 'react-native-paper-tabs';
-import { Appbar} from 'react-native-paper';
+import { Appbar, List } from 'react-native-paper';
 
 import Flag from "./flag";
 
@@ -73,8 +73,8 @@ function HomeScreen() {
             renderItem={({ item }) => (
                 <Card mode="outlined">
                     <Card.Content>
-                        <Title>{item.name}</Title>
-                        <Paragraph>{item.nationality}</Paragraph>
+                        <Title style={{fontWeight: "bold"}}>{item.name}</Title>
+                        <Paragraph>{item.nationality} Team</Paragraph>
                     </Card.Content>
                 </Card>
             )}
@@ -97,6 +97,7 @@ function HomeScreen() {
                     <Card.Content>
                     <Card.Title 
                     title={item.circuitName}
+                    titleStyle={{fontWeight: "bold"}}
                     left={(props) => <Flag {...props} country={item.Location.country}/>}
                     />
                     
@@ -120,8 +121,12 @@ function HomeScreen() {
             renderItem={({ item }) => (
                 <Card mode="outlined">
                     <Card.Content>
-                        <Title>{item.givenName} <Text>{item.permanentNumber} </Text> </Title>
-                        <Paragraph>{item.familyName} | {item.nationality} | {item.dateOfBirth}</Paragraph>
+                        <Card.Title 
+                          title={`${item.givenName} ${item.familyName}`}
+                          titleStyle={{fontWeight: "bold"}}
+                          left={(props) => <Text {...props} style={{fontWeight: "bold", fontSize: 25, color:"#ff0100"}}>{item.permanentNumber} </Text>   }
+                        />
+                            
                     </Card.Content>
                 </Card>
             )}
