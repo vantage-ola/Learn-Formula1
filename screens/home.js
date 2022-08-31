@@ -6,7 +6,7 @@ import { Button, Title, Paragraph, Card, ActivityIndicator, IconButton } from "r
 import {Tabs, TabScreen} from 'react-native-paper-tabs';
 import { Appbar, List } from 'react-native-paper';
 
-import Flag from "./flag";
+import Flag from "../data/flag";
 
 function HomeScreen() {
     
@@ -126,7 +126,7 @@ function HomeScreen() {
             data={drivers.Drivers}
             keyExtractor={({ driverId }, index) => driverId}
             renderItem={({ item }) => (
-                <Card mode="outlined">
+                <Card mode="outlined" >
                     <Card.Content>
                         <Card.Title 
                           title={`${item.givenName} ${item.familyName}`}
