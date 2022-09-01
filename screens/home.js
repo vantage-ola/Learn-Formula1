@@ -7,6 +7,7 @@ import {Tabs, TabScreen} from 'react-native-paper-tabs';
 import { Appbar, List } from 'react-native-paper';
 
 import Flag from "../data/flag";
+import DriverResult from "../data/results";
 
 function HomeScreen() {
     
@@ -127,14 +128,14 @@ function HomeScreen() {
             keyExtractor={({ driverId }, index) => driverId}
             renderItem={({ item }) => (
                 <Card mode="outlined" >
-                    <Card.Content>
                         <Card.Title 
                           title={`${item.givenName} ${item.familyName}`}
                           titleStyle={{fontWeight: "bold"}}
                           left={(props) => <Text {...props} style={{fontWeight: "bold", fontSize: 25, color:"#ff0100"}}>{item.permanentNumber} </Text>   }
                           right={(props) => <IconButton {...props} icon="chevron-right" onPress={() => {}} />}
                         />
-                            
+                    <Card.Content>
+                        <Paragraph><DriverResult driver={item.driverId}/></Paragraph>
                     </Card.Content>
                 </Card>
             )}
