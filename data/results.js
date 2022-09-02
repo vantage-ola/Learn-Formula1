@@ -1,5 +1,7 @@
 import React, {  useState, useEffect } from "react";
-import { View, Text, FlatList } from "react-native";
+import { View, Text, FlatList, TouchableOpacity  } from "react-native";
+import { Button } from "react-native-paper";
+import Flag from "./flag";
 
 function DriverResult({driver}) {
 
@@ -19,7 +21,9 @@ function DriverResult({driver}) {
             data={result.Races}
             keyExtractor={({driverId }, index) => driverId} 
             renderItem={({item}) => (
-                    <Text>{item.raceName}</Text>
+                <TouchableOpacity >                  
+                    <Button mode="contained" icon={() => <Flag country={item.Circuit.Location.country}/>}>{item.raceName}</Button>
+                </TouchableOpacity>
             )}
             />
         </View>

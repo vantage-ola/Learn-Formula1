@@ -134,9 +134,9 @@ function HomeScreen() {
                           left={(props) => <Text {...props} style={{fontWeight: "bold", fontSize: 25, color:"#ff0100"}}>{item.permanentNumber} </Text>   }
                           right={(props) => <IconButton {...props} icon="chevron-right" onPress={() => {}} />}
                         />
-                    <Card.Content>
-                        <Paragraph><DriverResult driver={item.driverId}/></Paragraph>
-                    </Card.Content>
+
+                        {/*<DriverResult driver={item.driverId}/>*/}
+
                 </Card>
             )}
           />
