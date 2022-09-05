@@ -8,6 +8,7 @@ import { Appbar, List } from 'react-native-paper';
 
 import Flag from "../data/flag";
 import DriverResult from "../data/results";
+import TeamScreen from "./team";
 
 function HomeScreen() {
     
@@ -64,30 +65,7 @@ function HomeScreen() {
       <Tabs>
         
         <TabScreen label="Teams">
-            <View style={{  flex:1 }}>
-            {isLoading ? <ActivityIndicator animating={true} color={'#ff0100'} /> : 
-      ( <View style={{ flex: 1, flexDirection: 'column', justifyContent:  'space-between'}}>
-
-          <FlatList
-            data={teams.Constructors}
-            keyExtractor={({ constructorId }, index) => constructorId}
-            renderItem={({ item }) => (
-                <Card mode="outlined">
-                    <Card.Content>
-                        <Card.Title
-                        title={item.name}
-                        subtitle={`${item.nationality} Team`}
-                        subtitleStyle={{fontSize: 15}}
-                        right={(props) => <IconButton {...props} icon="chevron-right" onPress={() => {}} />}
-                        />
-                        
-                    </Card.Content>
-                </Card>
-            )}
-          />
-        </View>
-      )}
-            </View>
+            <TeamScreen />
         </TabScreen>
 
         <TabScreen label="Circuits" >
