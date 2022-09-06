@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { BASE_API_URL } from "../config";
-import {TabScreen} from 'react-native-paper-tabs';
-import { SafeAreaView, FlatList, View } from "react-native";
+import { FlatList, View } from "react-native";
 import { Card, ActivityIndicator, IconButton } from "react-native-paper";
 
 function TeamScreen() {
