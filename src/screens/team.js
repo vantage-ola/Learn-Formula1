@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { BASE_API_URL } from "../config";
+import { BASE_API_URL } from "../../config";
 import { FlatList, View } from "react-native";
 import { Card, ActivityIndicator, IconButton } from "react-native-paper";
 

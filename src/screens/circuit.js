@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { BASE_API_URL } from "../config";
-import { FlatList, View } from "react-native";
+import { BASE_API_URL } from "../../config";
+import { FlatList, TouchableOpacity, View } from "react-native";
 import { Card, ActivityIndicator, IconButton } from "react-native-paper";
-import Flag from "../data/flag";
+import Flag from "../../data/flag";
+import { useNavigation } from "@react-navigation/native";
 
 function CircuitScreen() {
+    const navigation = useNavigation()
     const [circuits, setCircuits] = useState([]);
     const [isLoading, setLoading] = useState(true);
 
@@ -23,6 +25,8 @@ function CircuitScreen() {
           data={circuits.Circuits}
           keyExtractor={({ circuitId }, index) => circuitId}
           renderItem={({ item }) => (
+            <TouchableOpacity onPress={() => navigation.navigate('NewScreen')}>
+     
               <Card mode="outlined">
                   <Card.Content>
                   <Card.Title 
@@ -35,6 +39,7 @@ function CircuitScreen() {
                   
                   </Card.Content>
               </Card>
+              </TouchableOpacity>
           )}
         />
       </View>
