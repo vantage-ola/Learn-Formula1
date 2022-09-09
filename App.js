@@ -1,11 +1,11 @@
 import React from 'react';
 import { Provider as PaperProvider, DefaultTheme } from 'react-native-paper';
-import HomeScreen from './screens/home';
+import Route from './src/navigation/route.stack';
 
 export default function App() {
   return (
     <PaperProvider theme={theme}>
-        <HomeScreen/>
+        <Route />
     </PaperProvider>
   );
 }
