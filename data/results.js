@@ -1,32 +1,70 @@
 import React, {  useState, useEffect } from "react";
-import { View, Text, FlatList, TouchableOpacity  } from "react-native";
-import { Button } from "react-native-paper";
+import { View, FlatList, ActivityIndicator } from "react-native";
+import {Appbar, Card , IconButton} from "react-native-paper";
 import Flag from "./flag";
 
-function DriverResult({driver}) {
+import axios from "axios";
+import { BASE_API_URL } from "../config";
+
+import { useNavigation } from "@react-navigation/native";
+
+function DriverResult({route}) {
 
     const [result, setResult ] = useState([]);
     const [isLoading, setLoading] = useState(true);
+    const { driverId } = route.params;
 
-    useEffect(() => {
-        fetch(`http://ergast.com/api/f1/drivers/${driver}/results.json`)
-          .then((response) => response.json())
-          .then((json) => setResult(json.MRData.RaceTable))
-          .catch((error) => console.error(error))
-          .finally(() => setLoading(false));
-      }, []);
+    const navigation = useNavigation()
+    useEffect(() => fetchData(), []);
+
+    const fetchData =() => {
+        const DriverResult = `${BASE_API_URL}drivers/${driverId}/results.json`
+
+        const getDriverResult = axios.get(DriverResult)
+        axios.all([getDriverResult]).then(
+            axios.spread((... allData) => {
+                const driverResult = allData[0].data
+
+
+                setResult(driverResult.MRData.RaceTable)
+
+            })
+
+        )
+        .catch((error) => console.error(error))
+        .finally(() => setLoading(false))
+        }
     return (
-        <View>
+        <View style={{flex: 1}} >
+            <Appbar.Header>
+            <Appbar.BackAction onPress={() => navigation.goBack()}/>
+            <Appbar.Content title={result.driverId} />
+            </Appbar.Header>
+            {isLoading ? <ActivityIndicator animating={true} color={'#ff0100'} 
+            style={{ flex: 1, alignItems: "center", justifyContent: "center", zIndex: 20 }} /> : 
+    ( <View style={{ flex: 1, flexDirection: 'column', justifyContent:  'space-between'}}>
+
+
             <FlatList
             data={result.Races}
-            keyExtractor={({driverId }, index) => driverId} 
+            keyExtractor={({driverId }, item) => item} 
             renderItem={({item}) => (
-                <TouchableOpacity >                  
-                    <Button mode="contained" icon={() => <Flag country={item.Circuit.Location.country}/>}>{item.raceName}</Button>
-                </TouchableOpacity>
+                <Card mode="outlined">
+                <Card.Content>
+                  <Card.Title 
+                  title={item.raceName}
+                  titleStyle={{fontWeight: "bold"}}
+                  left={(props) => <Flag {...props} country={item.Circuit.Location.country}/>}
+                  right={(props) => <IconButton {...props} icon="chevron-right" />}
+
+                  />
+                  </Card.Content>    
+                </Card>
             )}
             />
-        </View>
+            </View>
+    )}
+    </View>
     )
 }
 
