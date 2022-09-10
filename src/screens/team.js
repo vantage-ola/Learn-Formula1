@@ -17,7 +17,8 @@ function TeamScreen() {
     , []);
     return (
             <View style={{  flex:1 }}>
-            {isLoading ? <ActivityIndicator animating={true} color={'#ff0100'} /> : 
+            {isLoading ? <ActivityIndicator size ='large' animating={true} color={'#ff0100'} 
+            style={{ flex: 1, alignItems: "center", justifyContent: "center", zIndex: 20 }} /> : 
       ( <View style={{ flex: 1, flexDirection: 'column', justifyContent:  'space-between'}}>
 
           <FlatList
@@ -31,8 +32,7 @@ function TeamScreen() {
                         subtitle={`${item.nationality} Team`}
                         subtitleStyle={{fontSize: 15}}
                         right={(props) => <IconButton {...props} icon="chevron-right" />}
-                        />
-                        
+                        /> 
                     </Card.Content>
                 </Card>
             )}
