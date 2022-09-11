@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { View, Platform} from 'react-native';
-import { Appbar } from 'react-native-paper';
-import { Button } from "react-native-paper";
+import { Appbar , Button, IconButton, Text} from 'react-native-paper';
 
 
 function Header() {
@@ -14,11 +13,13 @@ function Header() {
             {/* Header, contains title, edit and side bar button */}
         <Appbar.Header>
             <Appbar.Action icon={MORE_ICON} onPress={() => {}} />            
-            <Appbar.Content titleStyle={{fontWeight: "bold", fontSize: 25 }} title={`${year} Season`} />
-            <Button color="white" >Edit</Button>
+            <Appbar.Content titleStyle={{fontWeight: "bold", fontSize: 25 }} title="Learn F1" />
+            <Text variant="labelSmall" style={{color: "#fff", fontWeight: "bold"}}>{`${year}`}</Text>
+            <Appbar.Action icon="menu-down" onPress={() => {}} />
         </Appbar.Header>
         </View>
     )
+
 }
 
 
