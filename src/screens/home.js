@@ -16,7 +16,7 @@ function HomeScreen() {
 
         <Header/>
       {/* Tabs, contains swipeable rendered data*/}  
-      <Tabs>
+      <Tabs mode="scrollable">
         
       <TabScreen label="Drivers">
             <DriverScreen/>
@@ -29,6 +29,11 @@ function HomeScreen() {
         <TabScreen label="Circuits" >
             <CircuitScreen/>
         </TabScreen>
+
+        <TabScreen label="Schedule">
+
+        </TabScreen>
+        
 
       </Tabs>
     </View>

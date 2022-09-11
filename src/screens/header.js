@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View, Platform} from 'react-native';
-import { Appbar , Button, IconButton, Text} from 'react-native-paper';
+import { Appbar , Text} from 'react-native-paper';
 
 
 function Header() {

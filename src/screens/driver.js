@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { BASE_API_URL } from "../../config";
 import { Text, FlatList, View, TouchableOpacity } from "react-native";
 import { Card, ActivityIndicator, IconButton } from 'react-native-paper';
-import DriverResult from "../../data/results";
 import { useNavigation } from "@react-navigation/native";
 
 
