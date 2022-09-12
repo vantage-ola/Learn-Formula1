@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { View, Platform} from 'react-native';
 import { Appbar , Text} from 'react-native-paper';
+import PickYear from "../../data/year";
 
 
 function Header() {
@@ -14,8 +15,8 @@ function Header() {
         <Appbar.Header>
             <Appbar.Action icon={MORE_ICON} onPress={() => {}} />            
             <Appbar.Content titleStyle={{fontWeight: "bold", fontSize: 25 }} title="Learn F1" />
-            <Text variant="labelSmall" style={{color: "#fff", fontWeight: "bold"}}>{`${year}`}</Text>
-            <Appbar.Action icon="menu-down" onPress={() => {}} />
+            <Text style={{fontSize: 15 ,color: '#fff'}}>Season </Text>
+            <PickYear/>
         </Appbar.Header>
         </View>
     )
