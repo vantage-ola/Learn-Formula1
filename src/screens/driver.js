@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { BASE_API_URL } from "../../config";
-import { Text, FlatList, View, TouchableOpacity } from "react-native";
-import { Card, ActivityIndicator, IconButton } from 'react-native-paper';
+import { FlatList, View, TouchableOpacity } from "react-native";
+import { Card, ActivityIndicator, IconButton, Text } from 'react-native-paper';
 import { useNavigation } from "@react-navigation/native";
 
 
@@ -10,15 +10,30 @@ function DriverScreen() {
     const navigation = useNavigation()
     const [isLoading, setLoading] = useState(true);
     const [drivers, setDrivers] = useState([]);
-
+    const [error, setError] = useState(null);
+    
     useEffect(() => {
         fetch(`${BASE_API_URL}2022/drivers.json`)
         .then((response) => response.json())
-        .then((json) => setDrivers(json.MRData.DriverTable))
-        .finally(() => setLoading(false))
+        .then((json) => {
+            
+            setLoading(false);
+            setDrivers(json.MRData.DriverTable)
+            
+            if (error) setError(null);
+        })
+        .catch((e) => {
+            setLoading(false);
+            setError("Connect to the Internet !");
+        });   
+
+
     }
     , []);
+    if (error) return <Text>ERROR: {error}</Text>;
+
     return (
+        
         <View style={{flex:1 }}>
         {isLoading ? <ActivityIndicator size ='large' animating={true} color={'#ff0100'} 
         style={{ flex: 1, alignItems: "center", justifyContent: "center", zIndex: 20 }} /> : 
@@ -42,8 +57,11 @@ function DriverScreen() {
        />
      </View>
    )}
+   
         </View>
-    )
+    );
+    
+    
 }
 
 export default DriverScreen;

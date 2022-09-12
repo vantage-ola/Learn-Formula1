@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { BASE_API_URL } from "../../config";
 import { FlatList, TouchableOpacity, View } from "react-native";
-import { Card, ActivityIndicator, IconButton } from "react-native-paper";
+import { Card, ActivityIndicator, IconButton, Text } from "react-native-paper";
 import Flag from "../../data/flag";
 import { useNavigation } from "@react-navigation/native";
 
@@ -9,13 +9,26 @@ function CircuitScreen() {
     const navigation = useNavigation()
     const [circuits, setCircuits] = useState([]);
     const [isLoading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         fetch(`${BASE_API_URL}2022/circuits.json`)
         .then((response) => response.json())
-        .then((json) => setCircuits(json.MRData.CircuitTable))
-        .finally(() => setLoading(false))
+        .then((json) => {
+            
+            setLoading(false);
+            setCircuits(json.MRData.CircuitTable)
+    
+            if (error) setError(null);
+        })
+
+        .catch((e) => {
+            setLoading(false);
+            setError("Connect to the Internet !");
+        });
     }, []);
+    if (error) return <Text>ERROR: {error}</Text>;
+
     return (
         <View style={{ flex:1 }} >
         {isLoading ? <ActivityIndicator size ='large'animating={true} color={'#ff0100'} 

@@ -1,6 +1,6 @@
 import React, {  useState, useEffect } from "react";
 import { View, FlatList, ActivityIndicator } from "react-native";
-import {Appbar, Card , IconButton} from "react-native-paper";
+import {Appbar, Card , IconButton, Text} from "react-native-paper";
 import Flag from "./flag";
 
 import axios from "axios";
@@ -12,6 +12,7 @@ function DriverResult({route}) {
 
     const [result, setResult ] = useState([]);
     const [isLoading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
     const { driverId } = route.params;
 
     const navigation = useNavigation()
@@ -25,16 +26,22 @@ function DriverResult({route}) {
             axios.spread((... allData) => {
                 const driverResult = allData[0].data
 
-
+                setLoading(false);
                 setResult(driverResult.MRData.RaceTable)
+
+                if (error) setError(null)
 
             })
 
         )
-        .catch((error) => console.error(error))
-        .finally(() => setLoading(false))
+        .catch((e) => {
+            setLoading(false);
+            setError("Connect to the Internet !");
+        });
         }
+    if (error) return <Text>ERROR: {error}</Text>;
     return (
+        
         <View style={{flex: 1}} >
             <Appbar.Header>
             <Appbar.BackAction onPress={() => navigation.goBack()}/>
@@ -66,6 +73,7 @@ function DriverResult({route}) {
     )}
     </View>
     )
+    
 }
 
 
