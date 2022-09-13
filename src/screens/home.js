@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { View} from 'react-native';
+import { View, Text} from 'react-native';
 
 import {Tabs, TabScreen} from 'react-native-paper-tabs';
 
@@ -7,6 +7,7 @@ import Header from "./header";
 import TeamScreen from "./team";
 import CircuitScreen from "./circuit";
 import DriverScreen from "./driver";
+import PickYear from "../../data/year";
 
 function HomeScreen() {
 
@@ -31,7 +32,7 @@ function HomeScreen() {
         </TabScreen>
 
         <TabScreen label="Schedule">
-
+            <Text>Schedule</Text>
         </TabScreen>
         
 
