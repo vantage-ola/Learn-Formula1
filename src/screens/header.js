@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { View, Platform} from 'react-native';
 import { Appbar, Text } from 'react-native-paper';
-import PickYear from "../../data/year";
 import { useNavigation } from "@react-navigation/native";
 
 function Header() {
