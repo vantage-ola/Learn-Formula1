@@ -37,14 +37,13 @@ function TeamScreen() {
             keyExtractor={({ constructorId }, index) => constructorId}
             renderItem={({ item }) => (
                 <Card mode="outlined" onPress={()=> {}}>
-                    <Card.Content>
                         <Card.Title
                         title={item.name}
                         subtitle={`${item.nationality} Team`}
                         subtitleStyle={{fontSize: 15}}
                         right={(props) => <IconButton {...props} icon="chevron-right" />}
                         /> 
-                    </Card.Content>
+
                 </Card>
             )}
           />

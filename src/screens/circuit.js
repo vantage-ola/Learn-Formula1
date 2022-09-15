@@ -42,7 +42,6 @@ function CircuitScreen() {
             <TouchableOpacity onPress={() => navigation.navigate('NewScreen')}>
      
               <Card mode="outlined">
-                  <Card.Content>
                   <Card.Title 
                   title={item.circuitName}
                   titleStyle={{fontWeight: "bold"}}
@@ -50,8 +49,6 @@ function CircuitScreen() {
                   right={(props) => <IconButton {...props} icon="chevron-right" />}
 
                   />
-                  
-                  </Card.Content>
               </Card>
               </TouchableOpacity>
           )}
