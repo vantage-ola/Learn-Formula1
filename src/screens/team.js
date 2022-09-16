@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { BASE_API_URL } from "../../config";
-import { FlatList, View } from "react-native";
+import { FlatList, View,TouchableOpacity } from "react-native";
 import { Card, ActivityIndicator, IconButton, Text } from "react-native-paper";
+import { useNavigation } from "@react-navigation/native";
 
 function TeamScreen() {
 
     const [teams, setTeams] = useState([])
     const [isLoading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+
+    const navigation = useNavigation()
 
     useEffect(() => {
         fetch(`${BASE_API_URL}2022/constructors.json`)
@@ -28,15 +31,17 @@ function TeamScreen() {
     if (error) return <Text>ERROR: {error}</Text>;
     return (
             <View style={{  flex:1 }}>
+            {/*Carousel Here*/}
             {isLoading ? <ActivityIndicator size ='large' animating={true} color={'#ff0100'} 
             style={{ flex: 1, alignItems: "center", justifyContent: "center", zIndex: 20 }} /> : 
       ( <View style={{ flex: 1, flexDirection: 'column', justifyContent:  'space-between'}}>
 
           <FlatList
             data={teams.Constructors}
-            keyExtractor={({ constructorId }, index) => constructorId}
+            keyExtractor={({ constructorId }, index) => index}
             renderItem={({ item }) => (
-                <Card mode="outlined" onPress={()=> {}}>
+                <TouchableOpacity onPress={() => navigation.navigate('TeamInfo', { constructorId: item.constructorId, teamName: item.name})}>
+                    <Card mode="outlined">
                         <Card.Title
                         title={item.name}
                         subtitle={`${item.nationality} Team`}
@@ -44,7 +49,9 @@ function TeamScreen() {
                         right={(props) => <IconButton {...props} icon="chevron-right" />}
                         /> 
 
-                </Card>
+                    </Card>
+                </TouchableOpacity>
+
             )}
           />
         </View>
