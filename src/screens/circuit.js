@@ -31,6 +31,7 @@ function CircuitScreen() {
 
     return (
         <View style={{ flex:1 }} >
+        {/*Carousel Here*/}
         {isLoading ? <ActivityIndicator size ='large'animating={true} color={'#ff0100'} 
         style={{ flex: 1, alignItems: "center", justifyContent: "center", zIndex: 20 }} /> : 
     ( <View style={{ flex: 1, flexDirection: 'column', justifyContent:  'space-between'}}>

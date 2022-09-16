@@ -57,7 +57,6 @@ function DriverResult({route}) {
             keyExtractor={({driverId }, item) => item} 
             renderItem={({item}) => (
                 <Card mode="outlined">
-                <Card.Content>
                   <Card.Title 
                   title={item.raceName}
                   titleStyle={{fontWeight: "bold"}}
@@ -65,7 +64,6 @@ function DriverResult({route}) {
                   right={(props) => <IconButton {...props} icon="chevron-right" />}
 
                   />
-                  </Card.Content>    
                 </Card>
             )}
             />
