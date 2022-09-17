@@ -53,7 +53,7 @@ function TeamInfo({route}) {
             <Appbar.BackAction onPress={() => navigation.goBack()}/>
             <Appbar.Content title={teamName} />
             </Appbar.Header>
-            {isLoading ? <ActivityIndicator size ='large' animating={true} color={'#ff0100'} 
+            {isLoading ? <ActivityIndicator  animating={true} color={'#ff0100'} 
             style={{ flex: 1, alignItems: "center", justifyContent: "center", zIndex: 20 }} /> : 
       ( <View style={{ flex: 1, flexDirection: 'column', justifyContent:  'space-between'}}>
         <FlatList 
