@@ -7,7 +7,7 @@ import Header from "./header";
 import TeamScreen from "./team";
 import CircuitScreen from "./circuit";
 import DriverScreen from "./driver";
-import PickYear from "../../data/year";
+import ScheduleScreen from "./schedule";
 
 function HomeScreen() {
 
@@ -32,7 +32,7 @@ function HomeScreen() {
         </TabScreen>
 
         <TabScreen label="Schedule">
-            <Text>Schedule</Text>
+            <ScheduleScreen/>
         </TabScreen>
         
 
