@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@gorhom/bottom-sheet": "^4",
+    "@hookstate/core": "^4.0.0-rc21",
+    "@hookstate/localstored": "^4.0.0-rc21",
     "@react-native-community/datetimepicker": "6.1.2",
     "@react-native-picker/picker": "2.4.0",
     "@react-navigation/native": "^6.0.12",
