@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { BASE_API_URL } from "../../config";
-import { FlatList, View, TouchableOpacity } from "react-native";
-import { Card, ActivityIndicator, IconButton, Text } from 'react-native-paper';
+import { FlatList, View, TouchableOpacity ,ActivityIndicator } from "react-native";
+import { Card,IconButton, Text } from 'react-native-paper';
 import { useNavigation } from "@react-navigation/native";
 
 

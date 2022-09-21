@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { BASE_API_URL } from "../../config";
-import { FlatList, View,TouchableOpacity } from "react-native";
-import { Card, ActivityIndicator, IconButton, Text, DataTable } from "react-native-paper";
+import { FlatList, View, ActivityIndicator} from "react-native";
+import { Card, Text } from "react-native-paper";
 import Flag from "../../data/flag";
 
 function ScheduleScreen() {
