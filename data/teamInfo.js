@@ -65,7 +65,7 @@ function TeamInfo({route}) {
                                 subtitle={`${item.Circuit.Location.locality}, ${item.Circuit.Location.country}`}
                                 left={(props) => <Flag{...props} country={item.Circuit.Location.country}/>}>
                 {item.Results.map((s) => 
-                                <List.AccordionGroup >
+                                <List.AccordionGroup key={s.Driver.driverIds} >
                                 <List.Accordion title={`${s.Driver.givenName} ${s.Driver.familyName}`} 
                                 id={s.Driver.driverId}
                                 titleStyle={{fontWeight: "bold"}}
