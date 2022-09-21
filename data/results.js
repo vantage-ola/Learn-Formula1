@@ -13,7 +13,7 @@ function DriverResult({route}) {
     const [result, setResult ] = useState([]);
     const [isLoading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const { driverId } = route.params;
+    const { driverId, givenName, familyName } = route.params;
 
     const navigation = useNavigation()
     useEffect(() => fetchData(), []);
@@ -45,7 +45,7 @@ function DriverResult({route}) {
         <View style={{flex: 1}} >
             <Appbar.Header>
             <Appbar.BackAction onPress={() => navigation.goBack()}/>
-            <Appbar.Content title={result.driverId} />
+            <Appbar.Content title={`${givenName} ${familyName}`} />
             </Appbar.Header>
             {isLoading ? <ActivityIndicator animating={true} color={'#ff0100'} 
             style={{ flex: 1, alignItems: "center", justifyContent: "center", zIndex: 20 }} /> : 

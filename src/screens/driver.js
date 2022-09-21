@@ -44,7 +44,7 @@ function DriverScreen() {
          data={drivers.Drivers}
          keyExtractor={({ driverId }, index) => driverId}
          renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => navigation.navigate('DriverResult', { driverId: item.driverId})}>
+          <TouchableOpacity onPress={() => navigation.navigate('DriverResult', { driverId: item.driverId, givenName: item.givenName, familyName: item.familyName })}>
              <Card mode="outlined" >
                      <Card.Title 
                        title={`${item.givenName} ${item.familyName}`}

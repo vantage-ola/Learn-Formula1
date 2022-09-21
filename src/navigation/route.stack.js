@@ -16,7 +16,7 @@ export default function Route(props) {
           screenOptions={{headerShown: false}}
           initialRouteName="HomeScreen">
    <Screen name="HomeScreen" component={HomeScreen} />
-   <Screen name="DriverResult" component={DriverResult} options={({route})=> ({driverId: route.params.driverId})}/>
+   <Screen name="DriverResult" component={DriverResult} options={({route})=> ({driverId: route.params.driverId, givenName: route.params.givenName, familyName: route.params.familyName})}/>
    <Screen name="PickYear" component={PickYear} />
    <Screen name="TeamInfo" component={TeamInfo} options={({route})=> ({constructorId: route.params.constructorId, teamName: route.params.teamName})}/>
 
