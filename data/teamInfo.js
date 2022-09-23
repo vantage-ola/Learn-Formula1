@@ -71,7 +71,7 @@ function TeamInfo({route}) {
                                 titleStyle={{fontWeight: "bold"}}
                                 left={(props) => <Text {...props} style={{fontWeight: "bold", fontSize: 25, color:"#ff0100"}}>{s.Driver.permanentNumber} </Text>   }>
                                     <List.Item title={`Points: ${s.points} pts`}/>
-                                    <List.Item title={`Position: ${s.grid}`}/>
+                                    <List.Item title={`Position: ${s.position}`}/>
                                     <List.Item title={`Laps: ${s.laps}`}/>
                                     <List.Item title={`Status: ${s.status}`}/>
                                     <List.Item title={`Time: ${s.Time?.time}`} />
