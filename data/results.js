@@ -1,6 +1,6 @@
 import React, {  useState, useEffect } from "react";
-import { View, FlatList, ActivityIndicator } from "react-native";
-import {Appbar, Card , IconButton, Text} from "react-native-paper";
+import { View, FlatList, ActivityIndicator, TouchableOpacity } from "react-native";
+import {Appbar, Card , IconButton, Text, List} from "react-native-paper";
 import Flag from "./flag";
 
 import axios from "axios";
@@ -19,8 +19,7 @@ function DriverResult({route}) {
     useEffect(() => fetchData(), []);
 
     const fetchData =() => {
-        const DriverResult = `${BASE_API_URL}drivers/${driverId}/results.json`
-
+        const DriverResult = `${BASE_API_URL}2022/drivers/${driverId}/results.json`
         const getDriverResult = axios.get(DriverResult)
         axios.all([getDriverResult]).then(
             axios.spread((... allData) => {
@@ -40,6 +39,7 @@ function DriverResult({route}) {
         });
         }
     if (error) return <Text>ERROR: {error}</Text>;
+
     return (
         
         <View style={{flex: 1}} >
@@ -50,12 +50,11 @@ function DriverResult({route}) {
             {isLoading ? <ActivityIndicator animating={true} color={'#ff0100'} 
             style={{ flex: 1, alignItems: "center", justifyContent: "center", zIndex: 20 }} /> : 
     ( <View style={{ flex: 1, flexDirection: 'column', justifyContent:  'space-between'}}>
-
-
             <FlatList
             data={result.Races}
             keyExtractor={({driverId }, item) => item} 
             renderItem={({item}) => (
+            <TouchableOpacity onPress={() => {navigation.navigate('RaceResults', {race: item.Results, givenName: givenName, familyName: familyName})}}>
                 <Card mode="outlined">
                   <Card.Title 
                   title={item.raceName}
@@ -65,6 +64,8 @@ function DriverResult({route}) {
 
                   />
                 </Card>
+            </TouchableOpacity>
+
             )}
             />
             </View>
