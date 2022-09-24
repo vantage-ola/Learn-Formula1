@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { BASE_API_URL } from "../../config";
-import { FlatList, TouchableOpacity, View , ActivityIndicator } from "react-native";
-import { Card, IconButton, Text } from "react-native-paper";
+import { FlatList, View , ActivityIndicator } from "react-native";
+import { Card, Text } from "react-native-paper";
 import Flag from "../../data/flag";
-import { useNavigation } from "@react-navigation/native";
 
 function CircuitScreen() {
-    const navigation = useNavigation()
     const [circuits, setCircuits] = useState([]);
     const [isLoading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -18,7 +16,7 @@ function CircuitScreen() {
             
             setLoading(false);
             setCircuits(json.MRData.CircuitTable)
-    
+            
             if (error) setError(null);
         })
 
@@ -28,7 +26,7 @@ function CircuitScreen() {
         });
     }, []);
     if (error) return <Text>ERROR: {error}</Text>;
-
+    console.log(circuits)
     return (
         <View style={{ flex:1 }} >
         {/*Carousel Here*/}
@@ -39,19 +37,15 @@ function CircuitScreen() {
         <FlatList
           data={circuits.Circuits}
           keyExtractor={({ circuitId }, index) => circuitId}
-          renderItem={({ item }) => (
-            <TouchableOpacity onPress={() => navigation.navigate('NewScreen')}>
-     
+          renderItem={({ item }) => (     
               <Card mode="outlined">
                   <Card.Title 
                   title={item.circuitName}
                   titleStyle={{fontWeight: "bold"}}
                   left={(props) => <Flag {...props} country={item.Location.country}/>}
-                  right={(props) => <IconButton {...props} icon="chevron-right" />}
-
                   />
               </Card>
-              </TouchableOpacity>
+
           )}
         />
       </View>
