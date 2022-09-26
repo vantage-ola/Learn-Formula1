@@ -54,7 +54,7 @@ function DriverResult({route}) {
             data={result.Races}
             keyExtractor={({driverId }, item) => item} 
             renderItem={({item}) => (
-            <TouchableOpacity onPress={() => {navigation.navigate('RaceResults', {race: item.Results, givenName: givenName, familyName: familyName})}}>
+            <TouchableOpacity onPress={() => {navigation.navigate('RaceResults', {race: item.Results, givenName: givenName, familyName: familyName, result: item})}}>
                 <Card mode="outlined">
                   <Card.Title 
                   title={item.raceName}
