@@ -47,6 +47,7 @@ function TeamInfo({route}) {
         });
         }
     if (error) return <Text>ERROR: {error}</Text>;
+    console.log(teamDriverResult)
     return (
             <View style={{  flex:1 }}>
             <Appbar.Header>
@@ -58,14 +59,14 @@ function TeamInfo({route}) {
       ( <View style={{ flex: 1, flexDirection: 'column', justifyContent:  'space-between'}}>
         <FlatList 
         data={teamDriverResult.Races}
-        keyExtractor={({ constructorId }, index) => index}
+        keyExtractor={(item)=> item.round}
         renderItem={({item}) => (
             <Card>
                                 <List.Accordion title={`${item.raceName}`} 
                                 subtitle={`${item.Circuit.Location.locality}, ${item.Circuit.Location.country}`}
                                 left={(props) => <Flag{...props} country={item.Circuit.Location.country}/>}>
                 {item.Results.map((s) => 
-                                <List.AccordionGroup key={s.Driver.driverIds} >
+                                <List.AccordionGroup key={s.Driver.driverId} >
                                 <List.Accordion title={`${s.Driver.givenName} ${s.Driver.familyName}`} 
                                 id={s.Driver.driverId}
                                 titleStyle={{fontWeight: "bold"}}
