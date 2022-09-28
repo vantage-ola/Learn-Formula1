@@ -39,7 +39,6 @@ function DriverResult({route}) {
         });
         }
     if (error) return <Text>ERROR: {error}</Text>;
-
     return (
         
         <View style={{flex: 1}} >

@@ -13,11 +13,15 @@ const RaceResults = ({route}) => {
         <View style={{flex: 1}} >
         <Appbar.Header>
         <Appbar.BackAction onPress={() => navigation.goBack()}/>
-        <Appbar.Content title={`${givenName} ${familyName} at ${result.raceName} ${result.season}`} />
+        <Appbar.Content title={`${result.raceName}`} />
         </Appbar.Header>
         <View>
         {race.map((r) =>
         <Card key={r.Driver.driverId}>
+            <Card.Title title={`${givenName} ${familyName}`} subtitle={`${result.raceName} ${result.season}`}/>
+            
+            <Card>
+            <Card.Title title='Race Results' />
             <Card.Content>
                 <List.Item title={`Points: ${r.points} pts`}/>
                 <List.Item title={`Position: ${r.position}`}/>
@@ -29,6 +33,10 @@ const RaceResults = ({route}) => {
             </Card.Content>
 
             </Card>
+
+
+            </Card>
+            
         )}
         </View>  
     </View>
