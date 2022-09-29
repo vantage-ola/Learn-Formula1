@@ -61,7 +61,6 @@ function TeamInfo({route}) {
         data={teamDriverResult.Races}
         keyExtractor={(item)=> item.round}
         renderItem={({item}) => (
-            <Card>
                                 <List.Accordion title={`${item.raceName}`} 
                                 subtitle={`${item.Circuit.Location.locality}, ${item.Circuit.Location.country}`}
                                 left={(props) => <Flag{...props} country={item.Circuit.Location.country}/>}>
@@ -71,6 +70,7 @@ function TeamInfo({route}) {
                                 id={s.Driver.driverId}
                                 titleStyle={{fontWeight: "bold"}}
                                 left={(props) => <Text {...props} style={{fontWeight: "bold", fontSize: 25, color:"#ff0100"}}>{s.Driver.permanentNumber} </Text>   }>
+                                    <List.Section title="Race Results">
                                     <List.Item title={`Points: ${s.points} pts`}/>
                                     <List.Item title={`Position: ${s.position}`}/>
                                     <List.Item title={`Laps: ${s.laps}`}/>
@@ -78,11 +78,12 @@ function TeamInfo({route}) {
                                     <List.Item title={`Time: ${s.Time?.time}`} />
                                     <List.Item title={`Average Speed: ${s.FastestLap?.AverageSpeed.speed} ${s.FastestLap?.AverageSpeed.units}`}/>
                                     <List.Item title={`Fastest Time : ${s.FastestLap?.Time.time} on Lap ${s.FastestLap?.lap}`}/>
+                                    </List.Section>
                                 </List.Accordion>
                             </List.AccordionGroup>
                 )}
                 </List.Accordion>
-            </Card>
+
 
 
 
