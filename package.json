@@ -15,6 +15,7 @@
     "@hookstate/localstored": "^4.0.0-rc21",
     "@react-native-community/datetimepicker": "6.1.2",
     "@react-native-picker/picker": "2.4.0",
+    "@react-navigation/drawer": "^6.5.0",
     "@react-navigation/native": "^6.0.12",
     "@react-navigation/stack": "^6.2.2",
     "axios": "^0.27.2",
