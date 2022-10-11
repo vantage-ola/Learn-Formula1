@@ -1,5 +1,5 @@
 import React, {  useState, useEffect } from "react";
-import { View, FlatList, ActivityIndicator, TouchableOpacity } from "react-native";
+import { View, FlatList, ActivityIndicator, TouchableOpacity, Image, StyleSheet } from "react-native";
 import {Appbar, Card , IconButton, Text, List} from "react-native-paper";
 import Flag from "./flag";
 
@@ -7,6 +7,10 @@ import axios from "axios";
 import { BASE_API_URL } from "../config";
 
 import { useNavigation } from "@react-navigation/native";
+
+import gold from "../assets/gold-medal.png";
+import silver from '../assets/silver-medal.png';
+import bronze from '../assets/bronze-medal.png';
 
 function DriverResult({route}) {
 
@@ -55,7 +59,41 @@ function DriverResult({route}) {
             setError("Connect to the Internet !");
         });
         }
+        const styles = StyleSheet.create({
+            container: {
+                flex: 1,
+                justifyContent: 'space-between',  
+                alignItems: "center", 
+                justifyContent: "center", 
+                flexDirection: 'row' 
+            },
+            content: {
+                width: 45, 
+                height: 45, 
+                marginHorizontal: 20,
+                marginTop: 20,
+                marginBottom: 10
+
+            },
+            number: {
+                justifyContent: 'space-between',
+                alignItems: "center", 
+                justifyContent: "center", 
+                flexDirection: 'row' 
+            },
+            content2: {
+                fontSize: 20,
+                fontWeight: "bold",
+                marginHorizontal: 38,
+                marginBottom: 10,
+                color: '#ff0100'
+
+            } 
+
+        })
     if (error) return <Text>ERROR: {error}</Text>;
+
+
     return (
         
         <View style={{flex: 1}} >
@@ -64,15 +102,23 @@ function DriverResult({route}) {
             <Appbar.Content title={`${givenName} ${familyName}`} />
             </Appbar.Header>
             <Card>
+        <View  style={styles.container}>
+                <Image source={gold} style={styles.content}/>
+                
+                <Image source={silver}  style={styles.content}/>
+                
+                <Image source={bronze}  style={styles.content}/>
 
-                <Text>1</Text>
-                <Text>{first}</Text>                
-                
-                <Text>2</Text>
-                <Text>{second}</Text>
-                
-                <Text>3</Text>
-                <Text>{third}</Text>
+        </View>
+        <View style={styles.number}>
+        <Text style={styles.content2}>{first}</Text>                
+
+        <Text style={styles.content2}>{second}</Text>
+
+        <Text style={styles.content2}>{third}</Text>
+
+        </View>
+
             </Card>
             {isLoading ? <ActivityIndicator animating={true} color={'#ff0100'} 
             style={{ flex: 1, alignItems: "center", justifyContent: "center", zIndex: 20 }} /> : 
