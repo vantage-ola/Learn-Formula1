@@ -27,3 +27,11 @@ Runs the app in the development mode.
 ```shell
 npm start
 ```
+
+## Resources
+
+---
+
+Formula 1 API from [Ergast](https://ergast.com/mrd/)
+
+Stock images from [FlatIcon](www.flaticon.com)
